@@ -4,13 +4,17 @@ pragma solidity ^0.8.2;
 interface IArtist {
 
   struct Person {
+    bool isLegendary;
     uint8 background;
-    uint8 colour;
+    uint8 beard;
+    uint8 clothes;
+    uint8 earrings;
     uint8 eyes;
-    uint8 hair;
-    uint8 hat;
-    uint8 necklace;
-    uint8 teeth;
+    uint8 glasses;
+    uint8 head;
+    uint8 mouth;
+    uint8 neck;
+    uint8 skin;
   }
-  
+
 }
