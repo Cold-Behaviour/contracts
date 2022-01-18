@@ -1,0 +1,26 @@
+{
+  "name": "cb-contracts",
+  "version": "1.0.0",
+  "description": "Ethereum smart contracts for the cold behaviour project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Cold-Behaviour/contracts.git"
+  },
+  "author": "Warren Schwartz",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Cold-Behaviour/contracts/issues"
+  },
+  "homepage": "https://github.com/Cold-Behaviour/contracts#readme",
+  "devDependencies": {
+    "@openzeppelin/truffle-upgrades": "^1.12.0"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^4.4.2",
+    "@openzeppelin/contracts-upgradeable": "^4.4.2"
+  }
+}
