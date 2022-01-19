@@ -4,17 +4,17 @@ pragma solidity ^0.8.2;
 interface IArtist {
 
   struct Person {
-    bool isLegendary;
     uint8 background;
-    uint8 beard;
-    uint8 clothes;
-    uint8 earrings;
-    uint8 eyes;
-    uint8 glasses;
+    uint8 skin;
+    uint8 neck;
     uint8 head;
     uint8 mouth;
-    uint8 neck;
-    uint8 skin;
+    uint8 beard;
+    uint8 eyes;
+    uint8 clothes;
+    uint8 earrings;
+    uint8 glasses;
   }
 
+  function getTokenTraits(uint256 tokenId) external view returns (Person memory);
 }

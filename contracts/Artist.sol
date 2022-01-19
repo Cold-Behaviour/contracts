@@ -8,7 +8,7 @@ import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 import "./IArtist.sol";
 
 contract Artist is IArtist, Initializable, ERC721Upgradeable, PausableUpgradeable, OwnableUpgradeable {
-    
+
     //mapping from tokenId to struct containing traits
     mapping (uint256 => Person) public tokenTraits;
 
@@ -39,5 +39,9 @@ contract Artist is IArtist, Initializable, ERC721Upgradeable, PausableUpgradeabl
         override
     {
         super._beforeTokenTransfer(from, to, tokenId);
+    }
+
+    function getTokenTraits(uint256 tokenId) external view override returns (Person memory) {
+        return tokenTraits[tokenId];
     }
 }
