@@ -16,5 +16,6 @@ interface IArtist {
     uint8 glasses;
   }
 
+  function addMinter(address[] memory _minters) external;
   function getTokenTraits(uint256 tokenId) external view returns (Person memory);
 }
