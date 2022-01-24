@@ -11,7 +11,7 @@ contract Traits is ITraits, Ownable {
 
   struct Trait {
     string name;
-    string png;
+    string cid;
   }
 
   IArtist public artist;
@@ -43,7 +43,7 @@ contract Traits is ITraits, Ownable {
     for (uint x = 0; x < traits.length; x++) {
       traitData[traitType][traitIds[x]] = Trait(
         traits[x].name,
-        traits[x].png
+        traits[x].cid
       );
     }
   }
@@ -55,8 +55,8 @@ contract Traits is ITraits, Ownable {
       Strings.toString(dimensions),
       '" height="',
       Strings.toString(dimensions),
-      '" image-rendering="pixelated" preserveAspectRatio="xMidyMid" xlink:href="data:image/png;base64,', 
-      trait.png,
+      '" image-rendering="pixelated" preserveAspectRatio="xMidyMid" xlink:href="https://ipfs.io/ipfs/', 
+      trait.cid,
       '" />'  
     ));
   }
@@ -78,7 +78,7 @@ contract Traits is ITraits, Ownable {
     ));
 
     return string(abi.encodePacked(
-      '<svg id="woolf" width="100%" height="100%" version="1.1" viewBox="0 0 ',
+      '<svg id="artist" width="100%" height="100%" version="1.1" viewBox="0 0 ',
       Strings.toString(dimensions),
       ' ',
       Strings.toString(dimensions),
