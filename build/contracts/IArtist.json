@@ -33,27 +33,7 @@
             },
             {
               "internalType": "uint8",
-              "name": "skin",
-              "type": "uint8"
-            },
-            {
-              "internalType": "uint8",
-              "name": "neck",
-              "type": "uint8"
-            },
-            {
-              "internalType": "uint8",
-              "name": "head",
-              "type": "uint8"
-            },
-            {
-              "internalType": "uint8",
-              "name": "mouth",
-              "type": "uint8"
-            },
-            {
-              "internalType": "uint8",
-              "name": "beard",
+              "name": "body",
               "type": "uint8"
             },
             {
@@ -63,17 +43,32 @@
             },
             {
               "internalType": "uint8",
-              "name": "clothes",
+              "name": "teeth",
               "type": "uint8"
             },
             {
               "internalType": "uint8",
-              "name": "earrings",
+              "name": "garment",
               "type": "uint8"
             },
             {
               "internalType": "uint8",
-              "name": "glasses",
+              "name": "chain",
+              "type": "uint8"
+            },
+            {
+              "internalType": "uint8",
+              "name": "face",
+              "type": "uint8"
+            },
+            {
+              "internalType": "uint8",
+              "name": "ear",
+              "type": "uint8"
+            },
+            {
+              "internalType": "uint8",
+              "name": "head",
               "type": "uint8"
             }
           ],
@@ -86,7 +81,7 @@
       "type": "function"
     }
   ],
-  "metadata": "{\"compiler\":{\"version\":\"0.8.10+commit.fc410830\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"address[]\",\"name\":\"_minters\",\"type\":\"address[]\"}],\"name\":\"addMinter\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"}],\"name\":\"getTokenTraits\",\"outputs\":[{\"components\":[{\"internalType\":\"uint8\",\"name\":\"background\",\"type\":\"uint8\"},{\"internalType\":\"uint8\",\"name\":\"skin\",\"type\":\"uint8\"},{\"internalType\":\"uint8\",\"name\":\"neck\",\"type\":\"uint8\"},{\"internalType\":\"uint8\",\"name\":\"head\",\"type\":\"uint8\"},{\"internalType\":\"uint8\",\"name\":\"mouth\",\"type\":\"uint8\"},{\"internalType\":\"uint8\",\"name\":\"beard\",\"type\":\"uint8\"},{\"internalType\":\"uint8\",\"name\":\"eyes\",\"type\":\"uint8\"},{\"internalType\":\"uint8\",\"name\":\"clothes\",\"type\":\"uint8\"},{\"internalType\":\"uint8\",\"name\":\"earrings\",\"type\":\"uint8\"},{\"internalType\":\"uint8\",\"name\":\"glasses\",\"type\":\"uint8\"}],\"internalType\":\"struct IArtist.Person\",\"name\":\"\",\"type\":\"tuple\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/IArtist.sol\":\"IArtist\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/IArtist.sol\":{\"keccak256\":\"0xcc381b2e3d9376a2422037b780d4e1aa16cdc1a348b5665bc7224fc92fdc78fe\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://e5ddaf3713c28d801cee140b8be41f90404fe6e14b3a4f3e3f3a4963d4224f87\",\"dweb:/ipfs/QmWNe8iEzYxYyFiCNzWyQz4qJejNbRgBuKwKcr4tLNZvvi\"]}},\"version\":1}",
+  "metadata": "{\"compiler\":{\"version\":\"0.8.10+commit.fc410830\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"address[]\",\"name\":\"_minters\",\"type\":\"address[]\"}],\"name\":\"addMinter\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"tokenId\",\"type\":\"uint256\"}],\"name\":\"getTokenTraits\",\"outputs\":[{\"components\":[{\"internalType\":\"uint8\",\"name\":\"background\",\"type\":\"uint8\"},{\"internalType\":\"uint8\",\"name\":\"body\",\"type\":\"uint8\"},{\"internalType\":\"uint8\",\"name\":\"eyes\",\"type\":\"uint8\"},{\"internalType\":\"uint8\",\"name\":\"teeth\",\"type\":\"uint8\"},{\"internalType\":\"uint8\",\"name\":\"garment\",\"type\":\"uint8\"},{\"internalType\":\"uint8\",\"name\":\"chain\",\"type\":\"uint8\"},{\"internalType\":\"uint8\",\"name\":\"face\",\"type\":\"uint8\"},{\"internalType\":\"uint8\",\"name\":\"ear\",\"type\":\"uint8\"},{\"internalType\":\"uint8\",\"name\":\"head\",\"type\":\"uint8\"}],\"internalType\":\"struct IArtist.Person\",\"name\":\"\",\"type\":\"tuple\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/IArtist.sol\":\"IArtist\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/IArtist.sol\":{\"keccak256\":\"0xa7782c03a1a8a820b3a9e635a53ce89161706eb7ab116fe6cfd48358d2ae27b4\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://914f0f9ef1323d35e407f3a0a26934508acf2fd6c8a51943ddc0f10e4cf0f465\",\"dweb:/ipfs/QmU6P7MKaVaXH4RMqSWUDhB7cSjxaP93WHzCp8QNzzQqXS\"]}},\"version\":1}",
   "bytecode": "0x",
   "deployedBytecode": "0x",
   "immutableReferences": {},
@@ -94,21 +89,21 @@
   "deployedGeneratedSources": [],
   "sourceMap": "",
   "deployedSourceMap": "",
-  "source": "// SPDX-License-Identifier: MIT\npragma solidity ^0.8.2;\n\ninterface IArtist {\n\n  struct Person {\n    uint8 background;\n    uint8 skin;\n    uint8 neck;\n    uint8 head;\n    uint8 mouth;\n    uint8 beard;\n    uint8 eyes;\n    uint8 clothes;\n    uint8 earrings;\n    uint8 glasses;\n  }\n\n  function addMinter(address[] memory _minters) external;\n  function getTokenTraits(uint256 tokenId) external view returns (Person memory);\n}\n",
+  "source": "// SPDX-License-Identifier: MIT\npragma solidity ^0.8.2;\n\ninterface IArtist {\n\n  struct Person {\n    uint8 background;\n    uint8 body;\n    uint8 eyes;\n    uint8 teeth;\n    uint8 garment;\n    uint8 chain;\n    uint8 face;\n    uint8 ear;\n    uint8 head;\n  }\n\n  function addMinter(address[] memory _minters) external;\n  function getTokenTraits(uint256 tokenId) external view returns (Person memory);\n}\n",
   "sourcePath": "/Users/warrenschwartz/Projects/ColdBehaviour/contracts/contracts/IArtist.sol",
   "ast": {
     "absolutePath": "project:/contracts/IArtist.sol",
     "exportedSymbols": {
       "IArtist": [
-        2394
+        2881
       ]
     },
-    "id": 2395,
+    "id": 2882,
     "license": "MIT",
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 2358,
+        "id": 2847,
         "literals": [
           "solidity",
           "^",
@@ -125,9 +120,9 @@
         "contractDependencies": [],
         "contractKind": "interface",
         "fullyImplemented": false,
-        "id": 2394,
+        "id": 2881,
         "linearizedBaseContracts": [
-          2394
+          2881
         ],
         "name": "IArtist",
         "nameLocation": "67:7:14",
@@ -135,16 +130,16 @@
         "nodes": [
           {
             "canonicalName": "IArtist.Person",
-            "id": 2379,
+            "id": 2866,
             "members": [
               {
                 "constant": false,
-                "id": 2360,
+                "id": 2849,
                 "mutability": "mutable",
                 "name": "background",
                 "nameLocation": "106:10:14",
                 "nodeType": "VariableDeclaration",
-                "scope": 2379,
+                "scope": 2866,
                 "src": "100:16:14",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -153,7 +148,7 @@
                   "typeString": "uint8"
                 },
                 "typeName": {
-                  "id": 2359,
+                  "id": 2848,
                   "name": "uint8",
                   "nodeType": "ElementaryTypeName",
                   "src": "100:5:14",
@@ -166,12 +161,12 @@
               },
               {
                 "constant": false,
-                "id": 2362,
+                "id": 2851,
                 "mutability": "mutable",
-                "name": "skin",
+                "name": "body",
                 "nameLocation": "128:4:14",
                 "nodeType": "VariableDeclaration",
-                "scope": 2379,
+                "scope": 2866,
                 "src": "122:10:14",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -180,7 +175,7 @@
                   "typeString": "uint8"
                 },
                 "typeName": {
-                  "id": 2361,
+                  "id": 2850,
                   "name": "uint8",
                   "nodeType": "ElementaryTypeName",
                   "src": "122:5:14",
@@ -193,12 +188,12 @@
               },
               {
                 "constant": false,
-                "id": 2364,
+                "id": 2853,
                 "mutability": "mutable",
-                "name": "neck",
+                "name": "eyes",
                 "nameLocation": "144:4:14",
                 "nodeType": "VariableDeclaration",
-                "scope": 2379,
+                "scope": 2866,
                 "src": "138:10:14",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -207,7 +202,7 @@
                   "typeString": "uint8"
                 },
                 "typeName": {
-                  "id": 2363,
+                  "id": 2852,
                   "name": "uint8",
                   "nodeType": "ElementaryTypeName",
                   "src": "138:5:14",
@@ -220,13 +215,13 @@
               },
               {
                 "constant": false,
-                "id": 2366,
+                "id": 2855,
                 "mutability": "mutable",
-                "name": "head",
-                "nameLocation": "160:4:14",
+                "name": "teeth",
+                "nameLocation": "160:5:14",
                 "nodeType": "VariableDeclaration",
-                "scope": 2379,
-                "src": "154:10:14",
+                "scope": 2866,
+                "src": "154:11:14",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -234,7 +229,7 @@
                   "typeString": "uint8"
                 },
                 "typeName": {
-                  "id": 2365,
+                  "id": 2854,
                   "name": "uint8",
                   "nodeType": "ElementaryTypeName",
                   "src": "154:5:14",
@@ -247,13 +242,13 @@
               },
               {
                 "constant": false,
-                "id": 2368,
+                "id": 2857,
                 "mutability": "mutable",
-                "name": "mouth",
-                "nameLocation": "176:5:14",
+                "name": "garment",
+                "nameLocation": "177:7:14",
                 "nodeType": "VariableDeclaration",
-                "scope": 2379,
-                "src": "170:11:14",
+                "scope": 2866,
+                "src": "171:13:14",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -261,10 +256,10 @@
                   "typeString": "uint8"
                 },
                 "typeName": {
-                  "id": 2367,
+                  "id": 2856,
                   "name": "uint8",
                   "nodeType": "ElementaryTypeName",
-                  "src": "170:5:14",
+                  "src": "171:5:14",
                   "typeDescriptions": {
                     "typeIdentifier": "t_uint8",
                     "typeString": "uint8"
@@ -274,13 +269,13 @@
               },
               {
                 "constant": false,
-                "id": 2370,
+                "id": 2859,
                 "mutability": "mutable",
-                "name": "beard",
-                "nameLocation": "193:5:14",
+                "name": "chain",
+                "nameLocation": "196:5:14",
                 "nodeType": "VariableDeclaration",
-                "scope": 2379,
-                "src": "187:11:14",
+                "scope": 2866,
+                "src": "190:11:14",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -288,10 +283,10 @@
                   "typeString": "uint8"
                 },
                 "typeName": {
-                  "id": 2369,
+                  "id": 2858,
                   "name": "uint8",
                   "nodeType": "ElementaryTypeName",
-                  "src": "187:5:14",
+                  "src": "190:5:14",
                   "typeDescriptions": {
                     "typeIdentifier": "t_uint8",
                     "typeString": "uint8"
@@ -301,13 +296,13 @@
               },
               {
                 "constant": false,
-                "id": 2372,
+                "id": 2861,
                 "mutability": "mutable",
-                "name": "eyes",
-                "nameLocation": "210:4:14",
+                "name": "face",
+                "nameLocation": "213:4:14",
                 "nodeType": "VariableDeclaration",
-                "scope": 2379,
-                "src": "204:10:14",
+                "scope": 2866,
+                "src": "207:10:14",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -315,10 +310,10 @@
                   "typeString": "uint8"
                 },
                 "typeName": {
-                  "id": 2371,
+                  "id": 2860,
                   "name": "uint8",
                   "nodeType": "ElementaryTypeName",
-                  "src": "204:5:14",
+                  "src": "207:5:14",
                   "typeDescriptions": {
                     "typeIdentifier": "t_uint8",
                     "typeString": "uint8"
@@ -328,13 +323,13 @@
               },
               {
                 "constant": false,
-                "id": 2374,
+                "id": 2863,
                 "mutability": "mutable",
-                "name": "clothes",
-                "nameLocation": "226:7:14",
+                "name": "ear",
+                "nameLocation": "229:3:14",
                 "nodeType": "VariableDeclaration",
-                "scope": 2379,
-                "src": "220:13:14",
+                "scope": 2866,
+                "src": "223:9:14",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -342,10 +337,10 @@
                   "typeString": "uint8"
                 },
                 "typeName": {
-                  "id": 2373,
+                  "id": 2862,
                   "name": "uint8",
                   "nodeType": "ElementaryTypeName",
-                  "src": "220:5:14",
+                  "src": "223:5:14",
                   "typeDescriptions": {
                     "typeIdentifier": "t_uint8",
                     "typeString": "uint8"
@@ -355,13 +350,13 @@
               },
               {
                 "constant": false,
-                "id": 2376,
+                "id": 2865,
                 "mutability": "mutable",
-                "name": "earrings",
-                "nameLocation": "245:8:14",
+                "name": "head",
+                "nameLocation": "244:4:14",
                 "nodeType": "VariableDeclaration",
-                "scope": 2379,
-                "src": "239:14:14",
+                "scope": 2866,
+                "src": "238:10:14",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -369,37 +364,10 @@
                   "typeString": "uint8"
                 },
                 "typeName": {
-                  "id": 2375,
+                  "id": 2864,
                   "name": "uint8",
                   "nodeType": "ElementaryTypeName",
-                  "src": "239:5:14",
-                  "typeDescriptions": {
-                    "typeIdentifier": "t_uint8",
-                    "typeString": "uint8"
-                  }
-                },
-                "visibility": "internal"
-              },
-              {
-                "constant": false,
-                "id": 2378,
-                "mutability": "mutable",
-                "name": "glasses",
-                "nameLocation": "265:7:14",
-                "nodeType": "VariableDeclaration",
-                "scope": 2379,
-                "src": "259:13:14",
-                "stateVariable": false,
-                "storageLocation": "default",
-                "typeDescriptions": {
-                  "typeIdentifier": "t_uint8",
-                  "typeString": "uint8"
-                },
-                "typeName": {
-                  "id": 2377,
-                  "name": "uint8",
-                  "nodeType": "ElementaryTypeName",
-                  "src": "259:5:14",
+                  "src": "238:5:14",
                   "typeDescriptions": {
                     "typeIdentifier": "t_uint8",
                     "typeString": "uint8"
@@ -411,32 +379,32 @@
             "name": "Person",
             "nameLocation": "87:6:14",
             "nodeType": "StructDefinition",
-            "scope": 2394,
-            "src": "80:197:14",
+            "scope": 2881,
+            "src": "80:173:14",
             "visibility": "public"
           },
           {
             "functionSelector": "f18e33e1",
-            "id": 2385,
+            "id": 2872,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "addMinter",
-            "nameLocation": "290:9:14",
+            "nameLocation": "266:9:14",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 2383,
+              "id": 2870,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2382,
+                  "id": 2869,
                   "mutability": "mutable",
                   "name": "_minters",
-                  "nameLocation": "317:8:14",
+                  "nameLocation": "293:8:14",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2385,
-                  "src": "300:25:14",
+                  "scope": 2872,
+                  "src": "276:25:14",
                   "stateVariable": false,
                   "storageLocation": "memory",
                   "typeDescriptions": {
@@ -445,19 +413,19 @@
                   },
                   "typeName": {
                     "baseType": {
-                      "id": 2380,
+                      "id": 2867,
                       "name": "address",
                       "nodeType": "ElementaryTypeName",
-                      "src": "300:7:14",
+                      "src": "276:7:14",
                       "stateMutability": "nonpayable",
                       "typeDescriptions": {
                         "typeIdentifier": "t_address",
                         "typeString": "address"
                       }
                     },
-                    "id": 2381,
+                    "id": 2868,
                     "nodeType": "ArrayTypeName",
-                    "src": "300:9:14",
+                    "src": "276:9:14",
                     "typeDescriptions": {
                       "typeIdentifier": "t_array$_t_address_$dyn_storage_ptr",
                       "typeString": "address[]"
@@ -466,42 +434,42 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "299:27:14"
+              "src": "275:27:14"
             },
             "returnParameters": {
-              "id": 2384,
+              "id": 2871,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "335:0:14"
+              "src": "311:0:14"
             },
-            "scope": 2394,
-            "src": "281:55:14",
+            "scope": 2881,
+            "src": "257:55:14",
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "external"
           },
           {
             "functionSelector": "94e56847",
-            "id": 2393,
+            "id": 2880,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "getTokenTraits",
-            "nameLocation": "348:14:14",
+            "nameLocation": "324:14:14",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 2388,
+              "id": 2875,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2387,
+                  "id": 2874,
                   "mutability": "mutable",
                   "name": "tokenId",
-                  "nameLocation": "371:7:14",
+                  "nameLocation": "347:7:14",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2393,
-                  "src": "363:15:14",
+                  "scope": 2880,
+                  "src": "339:15:14",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -509,10 +477,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 2386,
+                    "id": 2873,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "363:7:14",
+                    "src": "339:7:14",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -521,76 +489,76 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "362:17:14"
+              "src": "338:17:14"
             },
             "returnParameters": {
-              "id": 2392,
+              "id": 2879,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2391,
+                  "id": 2878,
                   "mutability": "mutable",
                   "name": "",
                   "nameLocation": "-1:-1:-1",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2393,
-                  "src": "403:13:14",
+                  "scope": 2880,
+                  "src": "379:13:14",
                   "stateVariable": false,
                   "storageLocation": "memory",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_struct$_Person_$2379_memory_ptr",
+                    "typeIdentifier": "t_struct$_Person_$2866_memory_ptr",
                     "typeString": "struct IArtist.Person"
                   },
                   "typeName": {
-                    "id": 2390,
+                    "id": 2877,
                     "nodeType": "UserDefinedTypeName",
                     "pathNode": {
-                      "id": 2389,
+                      "id": 2876,
                       "name": "Person",
                       "nodeType": "IdentifierPath",
-                      "referencedDeclaration": 2379,
-                      "src": "403:6:14"
+                      "referencedDeclaration": 2866,
+                      "src": "379:6:14"
                     },
-                    "referencedDeclaration": 2379,
-                    "src": "403:6:14",
+                    "referencedDeclaration": 2866,
+                    "src": "379:6:14",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_struct$_Person_$2379_storage_ptr",
+                      "typeIdentifier": "t_struct$_Person_$2866_storage_ptr",
                       "typeString": "struct IArtist.Person"
                     }
                   },
                   "visibility": "internal"
                 }
               ],
-              "src": "402:15:14"
+              "src": "378:15:14"
             },
-            "scope": 2394,
-            "src": "339:79:14",
+            "scope": 2881,
+            "src": "315:79:14",
             "stateMutability": "view",
             "virtual": false,
             "visibility": "external"
           }
         ],
-        "scope": 2395,
-        "src": "57:363:14",
+        "scope": 2882,
+        "src": "57:339:14",
         "usedErrors": []
       }
     ],
-    "src": "32:389:14"
+    "src": "32:365:14"
   },
   "legacyAST": {
     "absolutePath": "project:/contracts/IArtist.sol",
     "exportedSymbols": {
       "IArtist": [
-        2394
+        2881
       ]
     },
-    "id": 2395,
+    "id": 2882,
     "license": "MIT",
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 2358,
+        "id": 2847,
         "literals": [
           "solidity",
           "^",
@@ -607,9 +575,9 @@
         "contractDependencies": [],
         "contractKind": "interface",
         "fullyImplemented": false,
-        "id": 2394,
+        "id": 2881,
         "linearizedBaseContracts": [
-          2394
+          2881
         ],
         "name": "IArtist",
         "nameLocation": "67:7:14",
@@ -617,16 +585,16 @@
         "nodes": [
           {
             "canonicalName": "IArtist.Person",
-            "id": 2379,
+            "id": 2866,
             "members": [
               {
                 "constant": false,
-                "id": 2360,
+                "id": 2849,
                 "mutability": "mutable",
                 "name": "background",
                 "nameLocation": "106:10:14",
                 "nodeType": "VariableDeclaration",
-                "scope": 2379,
+                "scope": 2866,
                 "src": "100:16:14",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -635,7 +603,7 @@
                   "typeString": "uint8"
                 },
                 "typeName": {
-                  "id": 2359,
+                  "id": 2848,
                   "name": "uint8",
                   "nodeType": "ElementaryTypeName",
                   "src": "100:5:14",
@@ -648,12 +616,12 @@
               },
               {
                 "constant": false,
-                "id": 2362,
+                "id": 2851,
                 "mutability": "mutable",
-                "name": "skin",
+                "name": "body",
                 "nameLocation": "128:4:14",
                 "nodeType": "VariableDeclaration",
-                "scope": 2379,
+                "scope": 2866,
                 "src": "122:10:14",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -662,7 +630,7 @@
                   "typeString": "uint8"
                 },
                 "typeName": {
-                  "id": 2361,
+                  "id": 2850,
                   "name": "uint8",
                   "nodeType": "ElementaryTypeName",
                   "src": "122:5:14",
@@ -675,12 +643,12 @@
               },
               {
                 "constant": false,
-                "id": 2364,
+                "id": 2853,
                 "mutability": "mutable",
-                "name": "neck",
+                "name": "eyes",
                 "nameLocation": "144:4:14",
                 "nodeType": "VariableDeclaration",
-                "scope": 2379,
+                "scope": 2866,
                 "src": "138:10:14",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -689,7 +657,7 @@
                   "typeString": "uint8"
                 },
                 "typeName": {
-                  "id": 2363,
+                  "id": 2852,
                   "name": "uint8",
                   "nodeType": "ElementaryTypeName",
                   "src": "138:5:14",
@@ -702,13 +670,13 @@
               },
               {
                 "constant": false,
-                "id": 2366,
+                "id": 2855,
                 "mutability": "mutable",
-                "name": "head",
-                "nameLocation": "160:4:14",
+                "name": "teeth",
+                "nameLocation": "160:5:14",
                 "nodeType": "VariableDeclaration",
-                "scope": 2379,
-                "src": "154:10:14",
+                "scope": 2866,
+                "src": "154:11:14",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -716,7 +684,7 @@
                   "typeString": "uint8"
                 },
                 "typeName": {
-                  "id": 2365,
+                  "id": 2854,
                   "name": "uint8",
                   "nodeType": "ElementaryTypeName",
                   "src": "154:5:14",
@@ -729,13 +697,13 @@
               },
               {
                 "constant": false,
-                "id": 2368,
+                "id": 2857,
                 "mutability": "mutable",
-                "name": "mouth",
-                "nameLocation": "176:5:14",
+                "name": "garment",
+                "nameLocation": "177:7:14",
                 "nodeType": "VariableDeclaration",
-                "scope": 2379,
-                "src": "170:11:14",
+                "scope": 2866,
+                "src": "171:13:14",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -743,10 +711,10 @@
                   "typeString": "uint8"
                 },
                 "typeName": {
-                  "id": 2367,
+                  "id": 2856,
                   "name": "uint8",
                   "nodeType": "ElementaryTypeName",
-                  "src": "170:5:14",
+                  "src": "171:5:14",
                   "typeDescriptions": {
                     "typeIdentifier": "t_uint8",
                     "typeString": "uint8"
@@ -756,13 +724,13 @@
               },
               {
                 "constant": false,
-                "id": 2370,
+                "id": 2859,
                 "mutability": "mutable",
-                "name": "beard",
-                "nameLocation": "193:5:14",
+                "name": "chain",
+                "nameLocation": "196:5:14",
                 "nodeType": "VariableDeclaration",
-                "scope": 2379,
-                "src": "187:11:14",
+                "scope": 2866,
+                "src": "190:11:14",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -770,10 +738,10 @@
                   "typeString": "uint8"
                 },
                 "typeName": {
-                  "id": 2369,
+                  "id": 2858,
                   "name": "uint8",
                   "nodeType": "ElementaryTypeName",
-                  "src": "187:5:14",
+                  "src": "190:5:14",
                   "typeDescriptions": {
                     "typeIdentifier": "t_uint8",
                     "typeString": "uint8"
@@ -783,13 +751,13 @@
               },
               {
                 "constant": false,
-                "id": 2372,
+                "id": 2861,
                 "mutability": "mutable",
-                "name": "eyes",
-                "nameLocation": "210:4:14",
+                "name": "face",
+                "nameLocation": "213:4:14",
                 "nodeType": "VariableDeclaration",
-                "scope": 2379,
-                "src": "204:10:14",
+                "scope": 2866,
+                "src": "207:10:14",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -797,10 +765,10 @@
                   "typeString": "uint8"
                 },
                 "typeName": {
-                  "id": 2371,
+                  "id": 2860,
                   "name": "uint8",
                   "nodeType": "ElementaryTypeName",
-                  "src": "204:5:14",
+                  "src": "207:5:14",
                   "typeDescriptions": {
                     "typeIdentifier": "t_uint8",
                     "typeString": "uint8"
@@ -810,13 +778,13 @@
               },
               {
                 "constant": false,
-                "id": 2374,
+                "id": 2863,
                 "mutability": "mutable",
-                "name": "clothes",
-                "nameLocation": "226:7:14",
+                "name": "ear",
+                "nameLocation": "229:3:14",
                 "nodeType": "VariableDeclaration",
-                "scope": 2379,
-                "src": "220:13:14",
+                "scope": 2866,
+                "src": "223:9:14",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -824,10 +792,10 @@
                   "typeString": "uint8"
                 },
                 "typeName": {
-                  "id": 2373,
+                  "id": 2862,
                   "name": "uint8",
                   "nodeType": "ElementaryTypeName",
-                  "src": "220:5:14",
+                  "src": "223:5:14",
                   "typeDescriptions": {
                     "typeIdentifier": "t_uint8",
                     "typeString": "uint8"
@@ -837,13 +805,13 @@
               },
               {
                 "constant": false,
-                "id": 2376,
+                "id": 2865,
                 "mutability": "mutable",
-                "name": "earrings",
-                "nameLocation": "245:8:14",
+                "name": "head",
+                "nameLocation": "244:4:14",
                 "nodeType": "VariableDeclaration",
-                "scope": 2379,
-                "src": "239:14:14",
+                "scope": 2866,
+                "src": "238:10:14",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -851,37 +819,10 @@
                   "typeString": "uint8"
                 },
                 "typeName": {
-                  "id": 2375,
+                  "id": 2864,
                   "name": "uint8",
                   "nodeType": "ElementaryTypeName",
-                  "src": "239:5:14",
-                  "typeDescriptions": {
-                    "typeIdentifier": "t_uint8",
-                    "typeString": "uint8"
-                  }
-                },
-                "visibility": "internal"
-              },
-              {
-                "constant": false,
-                "id": 2378,
-                "mutability": "mutable",
-                "name": "glasses",
-                "nameLocation": "265:7:14",
-                "nodeType": "VariableDeclaration",
-                "scope": 2379,
-                "src": "259:13:14",
-                "stateVariable": false,
-                "storageLocation": "default",
-                "typeDescriptions": {
-                  "typeIdentifier": "t_uint8",
-                  "typeString": "uint8"
-                },
-                "typeName": {
-                  "id": 2377,
-                  "name": "uint8",
-                  "nodeType": "ElementaryTypeName",
-                  "src": "259:5:14",
+                  "src": "238:5:14",
                   "typeDescriptions": {
                     "typeIdentifier": "t_uint8",
                     "typeString": "uint8"
@@ -893,32 +834,32 @@
             "name": "Person",
             "nameLocation": "87:6:14",
             "nodeType": "StructDefinition",
-            "scope": 2394,
-            "src": "80:197:14",
+            "scope": 2881,
+            "src": "80:173:14",
             "visibility": "public"
           },
           {
             "functionSelector": "f18e33e1",
-            "id": 2385,
+            "id": 2872,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "addMinter",
-            "nameLocation": "290:9:14",
+            "nameLocation": "266:9:14",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 2383,
+              "id": 2870,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2382,
+                  "id": 2869,
                   "mutability": "mutable",
                   "name": "_minters",
-                  "nameLocation": "317:8:14",
+                  "nameLocation": "293:8:14",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2385,
-                  "src": "300:25:14",
+                  "scope": 2872,
+                  "src": "276:25:14",
                   "stateVariable": false,
                   "storageLocation": "memory",
                   "typeDescriptions": {
@@ -927,19 +868,19 @@
                   },
                   "typeName": {
                     "baseType": {
-                      "id": 2380,
+                      "id": 2867,
                       "name": "address",
                       "nodeType": "ElementaryTypeName",
-                      "src": "300:7:14",
+                      "src": "276:7:14",
                       "stateMutability": "nonpayable",
                       "typeDescriptions": {
                         "typeIdentifier": "t_address",
                         "typeString": "address"
                       }
                     },
-                    "id": 2381,
+                    "id": 2868,
                     "nodeType": "ArrayTypeName",
-                    "src": "300:9:14",
+                    "src": "276:9:14",
                     "typeDescriptions": {
                       "typeIdentifier": "t_array$_t_address_$dyn_storage_ptr",
                       "typeString": "address[]"
@@ -948,42 +889,42 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "299:27:14"
+              "src": "275:27:14"
             },
             "returnParameters": {
-              "id": 2384,
+              "id": 2871,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "335:0:14"
+              "src": "311:0:14"
             },
-            "scope": 2394,
-            "src": "281:55:14",
+            "scope": 2881,
+            "src": "257:55:14",
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "external"
           },
           {
             "functionSelector": "94e56847",
-            "id": 2393,
+            "id": 2880,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "getTokenTraits",
-            "nameLocation": "348:14:14",
+            "nameLocation": "324:14:14",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 2388,
+              "id": 2875,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2387,
+                  "id": 2874,
                   "mutability": "mutable",
                   "name": "tokenId",
-                  "nameLocation": "371:7:14",
+                  "nameLocation": "347:7:14",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2393,
-                  "src": "363:15:14",
+                  "scope": 2880,
+                  "src": "339:15:14",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -991,10 +932,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 2386,
+                    "id": 2873,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "363:7:14",
+                    "src": "339:7:14",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -1003,62 +944,62 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "362:17:14"
+              "src": "338:17:14"
             },
             "returnParameters": {
-              "id": 2392,
+              "id": 2879,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2391,
+                  "id": 2878,
                   "mutability": "mutable",
                   "name": "",
                   "nameLocation": "-1:-1:-1",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2393,
-                  "src": "403:13:14",
+                  "scope": 2880,
+                  "src": "379:13:14",
                   "stateVariable": false,
                   "storageLocation": "memory",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_struct$_Person_$2379_memory_ptr",
+                    "typeIdentifier": "t_struct$_Person_$2866_memory_ptr",
                     "typeString": "struct IArtist.Person"
                   },
                   "typeName": {
-                    "id": 2390,
+                    "id": 2877,
                     "nodeType": "UserDefinedTypeName",
                     "pathNode": {
-                      "id": 2389,
+                      "id": 2876,
                       "name": "Person",
                       "nodeType": "IdentifierPath",
-                      "referencedDeclaration": 2379,
-                      "src": "403:6:14"
+                      "referencedDeclaration": 2866,
+                      "src": "379:6:14"
                     },
-                    "referencedDeclaration": 2379,
-                    "src": "403:6:14",
+                    "referencedDeclaration": 2866,
+                    "src": "379:6:14",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_struct$_Person_$2379_storage_ptr",
+                      "typeIdentifier": "t_struct$_Person_$2866_storage_ptr",
                       "typeString": "struct IArtist.Person"
                     }
                   },
                   "visibility": "internal"
                 }
               ],
-              "src": "402:15:14"
+              "src": "378:15:14"
             },
-            "scope": 2394,
-            "src": "339:79:14",
+            "scope": 2881,
+            "src": "315:79:14",
             "stateMutability": "view",
             "virtual": false,
             "visibility": "external"
           }
         ],
-        "scope": 2395,
-        "src": "57:363:14",
+        "scope": 2882,
+        "src": "57:339:14",
         "usedErrors": []
       }
     ],
-    "src": "32:389:14"
+    "src": "32:365:14"
   },
   "compiler": {
     "name": "solc",
@@ -1066,7 +1007,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.3",
-  "updatedAt": "2022-01-21T14:32:13.079Z",
+  "updatedAt": "2022-01-26T08:10:52.307Z",
   "devdoc": {
     "kind": "dev",
     "methods": {},

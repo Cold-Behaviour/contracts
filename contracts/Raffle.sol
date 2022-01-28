@@ -15,6 +15,9 @@ contract Raffle is Ownable {
   mapping (uint => address) public participants;
   mapping (uint => address) public whiteList;
 
+  event Entered(address _participant, uint _entryCount);
+  event Drawn();
+
   constructor(
     address _nftContract,
     uint _drawMinimum,
@@ -43,12 +46,15 @@ contract Raffle is Ownable {
     require(!isDrawn, "This raffle has already been drawn");
 
     uint count = whiteListMaximum;
+    uint interval = 1;
     if (count > entryCount) {
       count = entryCount;
+    } else {
+      interval = entryCount / count;
     }
 
     uint y = 0;
-    for (uint x = 0; x < count; x++) {
+    for (uint x = 0; x < count; x += interval) {
       if (participants[x].balance >= drawMinimum) {
         whiteList[y] = participants[x];
         y++;
@@ -63,12 +69,24 @@ contract Raffle is Ownable {
     nftContract.addMinter(wl);
 
     isDrawn = true;
+
+    emit Drawn();
   }
 
   function enter() external 
   {
     require(msg.sender.balance >= entryMinimum, "Your balance does not meet the minimum entry requirement");
+    bool exists = false;
+    for (uint x = 0; x < entryCount; x++) {
+      if (participants[x] == msg.sender) {
+        exists = true;
+      }
+    }
+    require(!exists, "You have already entered the raffle");
+
     participants[entryCount] = msg.sender;
     entryCount++;
+
+    emit Entered(msg.sender, entryCount);
   }
 }

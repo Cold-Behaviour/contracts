@@ -5,15 +5,14 @@ interface IArtist {
 
   struct Person {
     uint8 background;
-    uint8 skin;
-    uint8 neck;
-    uint8 head;
-    uint8 mouth;
-    uint8 beard;
+    uint8 body;
     uint8 eyes;
-    uint8 clothes;
-    uint8 earrings;
-    uint8 glasses;
+    uint8 teeth;
+    uint8 garment;
+    uint8 chain;
+    uint8 face;
+    uint8 ear;
+    uint8 head;
   }
 
   function addMinter(address[] memory _minters) external;

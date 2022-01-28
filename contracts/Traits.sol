@@ -17,25 +17,27 @@ contract Traits is ITraits, Ownable {
   IArtist public artist;
   uint16 dimensions;
 
-  constructor(uint16 _dimensions) {
-    require(_dimensions < 65536, "Number is too large and will cause an overflow exception");
-    dimensions = _dimensions;
+  constructor() {
+    dimensions = 1024;
   }
 
-  string[10] _traitTypes = [
+  string[9] _traitTypes = [
     "background",
-    "skin",
-    "neck",
-    "head",
-    "mouth",
-    "beard",
+    "body",
     "eyes",
-    "clothes",
-    "earrings",
-    "glasses"
+    "teeth",
+    "garment",
+    "chain",
+    "face",
+    "ear",
+    "head"
   ];
 
   mapping(uint8 => mapping(uint8 => Trait)) public traitData;
+
+  function initialize(address _nftContract) external onlyOwner {
+    artist = IArtist(_nftContract);
+  }
 
   /* contract owner to upload names and images of each trait as base64 encoded PNGs */
   function uploadTraits(uint8 traitType, uint8[] calldata traitIds, Trait[] calldata traits) external onlyOwner {
@@ -66,15 +68,14 @@ contract Traits is ITraits, Ownable {
     IArtist.Person memory a = artist.getTokenTraits(tokenId);
     string memory svgString = string(abi.encodePacked(
       drawTrait(traitData[0][a.background]),
-      drawTrait(traitData[1][a.skin]),
-      drawTrait(traitData[2][a.neck]),
-      drawTrait(traitData[3][a.head]),
-      drawTrait(traitData[4][a.mouth]),
-      drawTrait(traitData[5][a.beard]),
-      drawTrait(traitData[6][a.eyes]),
-      drawTrait(traitData[7][a.clothes]),
-      drawTrait(traitData[8][a.earrings]),
-      drawTrait(traitData[9][a.glasses])
+      drawTrait(traitData[1][a.body]),
+      drawTrait(traitData[2][a.eyes]),
+      drawTrait(traitData[3][a.teeth]),
+      drawTrait(traitData[4][a.garment]),
+      drawTrait(traitData[5][a.chain]),
+      drawTrait(traitData[6][a.face]),
+      drawTrait(traitData[7][a.ear]),
+      drawTrait(traitData[8][a.head])
     ));
 
     return string(abi.encodePacked(
@@ -105,15 +106,14 @@ contract Traits is ITraits, Ownable {
     string memory traits = string(abi.encodePacked(
       '[',
       attributeForTypeAndValue(_traitTypes[0], traitData[0][a.background].name),
-      attributeForTypeAndValue(_traitTypes[1], traitData[1][a.skin].name), ',',
-      attributeForTypeAndValue(_traitTypes[2], traitData[2][a.neck].name), ',',
-      attributeForTypeAndValue(_traitTypes[3], traitData[3][a.head].name), ',',
-      attributeForTypeAndValue(_traitTypes[4], traitData[4][a.mouth].name), ',',
-      attributeForTypeAndValue(_traitTypes[5], traitData[5][a.beard].name), ',',
-      attributeForTypeAndValue(_traitTypes[6], traitData[6][a.eyes].name), ',',
-      attributeForTypeAndValue(_traitTypes[7], traitData[7][a.clothes].name), ',',
-      attributeForTypeAndValue(_traitTypes[8], traitData[8][a.earrings].name), ',',
-      attributeForTypeAndValue(_traitTypes[9], traitData[9][a.glasses].name), ']'
+      attributeForTypeAndValue(_traitTypes[1], traitData[1][a.body].name), ',',
+      attributeForTypeAndValue(_traitTypes[2], traitData[2][a.eyes].name), ',',
+      attributeForTypeAndValue(_traitTypes[3], traitData[3][a.teeth].name), ',',
+      attributeForTypeAndValue(_traitTypes[4], traitData[4][a.garment].name), ',',
+      attributeForTypeAndValue(_traitTypes[5], traitData[5][a.chain].name), ',',
+      attributeForTypeAndValue(_traitTypes[6], traitData[6][a.face].name), ',',
+      attributeForTypeAndValue(_traitTypes[7], traitData[7][a.ear].name), ',',
+      attributeForTypeAndValue(_traitTypes[8], traitData[8][a.head].name), ','
     ));
 
     return traits;
