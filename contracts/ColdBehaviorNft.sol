@@ -137,11 +137,19 @@ contract ColdBehaviorNft is ERC721, AccessControl {
 
   function generate(uint256 tokenId, uint256 rand) internal returns (Person memory t) {
     t = selectOptions(rand);
-    if (tokenTraits[structToHash(t)] == 0) {
-        tokenTraits[tokenId] = t;
-        tokenTraits[structToHash(t)] = tokenId;
-        return t;
+    bool exists = false;
+    for (uint x = 0; x < tokenId; x++) {
+      if (structToHash(tokenTraits[x]) == structToHash(t)) {
+        exists = true;
+        break;
+      }
     }
+
+    if (!exists) {
+      tokenTraits[tokenId] = t;
+      return t;
+    }
+
     return generate(tokenId, random(rand));
   }
 
@@ -152,7 +160,7 @@ contract ColdBehaviorNft is ERC721, AccessControl {
   function mint(uint8 amount) public payable onlyRole(MINTER_ROLE) {
     require(mintingStarted, "Minting has not yet started");
     require(msg.value >= (mintPrice * amount), "The amount specified does not match the minimum mint price");
-    require(_balances[msg.sender] < maxMintPerAddress, "You may not mint any more tokens with this address");
+    require(balanceOf(msg.sender) < maxMintPerAddress, "You may not mint any more tokens with this address");
     require(minted + amount <= MAX_TOKENS, "All tokens have been minted");
     
     (bool success, ) = teamAddress.call{value: (mintPrice * amount)}("");
