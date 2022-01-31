@@ -2,10 +2,10 @@
 pragma solidity ^0.8.2;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
-import "./IArtist.sol";
+import "./INft.sol";
 
 contract Raffle is Ownable {
-  IArtist nftContract;
+  INft nftContract;
   uint drawMinimum;
   uint entryCount = 0;
   uint entryMinimum;
@@ -36,7 +36,7 @@ contract Raffle is Ownable {
   ) 
   public onlyOwner 
   {
-    nftContract = IArtist(_nftContract);
+    nftContract = INft(_nftContract);
     drawMinimum = _drawMinimum;
     entryMinimum = _entryMinimum;
     whiteListMaximum = _whiteListMaximum;

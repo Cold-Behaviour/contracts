@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.2;
 
-interface IArtist {
-
+interface INft {
+    //Structs
   struct Person {
     uint8 background;
     uint8 body;
@@ -15,6 +15,7 @@ interface IArtist {
     uint8 head;
   }
 
+  //functions
+  function getTokenData(uint256 tokenId) external view returns (Person memory);
   function addMinter(address[] memory _minters) external;
-  function getTokenTraits(uint256 tokenId) external view returns (Person memory);
 }
