@@ -88,6 +88,26 @@ contract Layers is AccessControl {
     ));
   }
 
+  function drawSVGTest(INft.Person calldata person) external view returns (string memory) {
+    string memory svgString = string(abi.encodePacked(
+      drawLayer(layerData[0][person.background]),
+      drawLayer(layerData[1][person.body]),
+      drawLayer(layerData[2][person.eyes]),
+      drawLayer(layerData[3][person.teeth]),
+      drawLayer(layerData[4][person.garment]),
+      drawLayer(layerData[5][person.chain]),
+      drawLayer(layerData[6][person.face]),
+      drawLayer(layerData[7][person.ear]),
+      drawLayer(layerData[8][person.head])
+    ));
+
+    return string(abi.encodePacked(
+      '<svg id="artist" width="100%" height="100%" version="1.1" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">',
+      svgString,
+      "</svg>"
+    ));
+  }
+
   function getTokenUri(uint256 tokenId) public view returns (string memory) {
     string memory metadata = string(abi.encodePacked(
       '{"name": "',
