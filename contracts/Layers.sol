@@ -17,14 +17,14 @@ contract Layers is AccessControl {
   struct Layer {
     string cid;
     string name;
+    string trait;
   }
 
   //State Variables
-  string[9] layers = ["background","body","eyes","teeth","garment","chain","face","ear","head"];
   INft nftContract;
 
   //State Mappings
-  mapping (uint8 => mapping(uint8 => Layer)) public layerData;  // layer => option => Name/CID
+  mapping (uint => Layer) public layerData;  // layer => Name/CID/Trait
 
   constructor() {
     _grantRole(UPLOADER_ROLE, msg.sender);
@@ -41,22 +41,20 @@ contract Layers is AccessControl {
     ));
   }
   
-  function compileAttributes(uint256 tokenId) internal view returns (string memory) {
-    INft.Person memory a = nftContract.getTokenData(tokenId);
-    string memory traits = string(abi.encodePacked(
-      '[',
-      attributeForTypeAndValue(layers[0], layerData[0][a.background].name),
-      attributeForTypeAndValue(layers[1], layerData[1][a.body].name), ',',
-      attributeForTypeAndValue(layers[2], layerData[2][a.eyes].name), ',',
-      attributeForTypeAndValue(layers[3], layerData[3][a.teeth].name), ',',
-      attributeForTypeAndValue(layers[4], layerData[4][a.garment].name), ',',
-      attributeForTypeAndValue(layers[5], layerData[5][a.chain].name), ',',
-      attributeForTypeAndValue(layers[6], layerData[6][a.face].name), ',',
-      attributeForTypeAndValue(layers[7], layerData[7][a.ear].name), ',',
-      attributeForTypeAndValue(layers[8], layerData[8][a.head].name), ','
-    ));
+  function compileAttributes(uint256 tokenId) internal view returns (string memory traits) {
+    uint[] memory a = nftContract.getTokenData(tokenId);
+    traits = "[";
+    for (uint layer = 0; layer < a.length; layer++) {
+      traits = concat(traits, attributeForTypeAndValue(layerData[layer].trait, layerData[layer].name));
+    }
 
-    return traits;
+    return concat(traits, "]");
+  }
+
+  function concat(string memory a, string memory b) internal pure returns (string memory) {
+
+    return string(abi.encodePacked(a, b));
+
   }
 
   function drawLayer(Layer memory layer) internal pure returns (string memory) {
@@ -67,19 +65,11 @@ contract Layers is AccessControl {
     ));
   }
 
-  function drawSVG(uint256 tokenId) internal view returns (string memory) {
-    INft.Person memory a = nftContract.getTokenData(tokenId);
-    string memory svgString = string(abi.encodePacked(
-      drawLayer(layerData[0][a.background]),
-      drawLayer(layerData[1][a.body]),
-      drawLayer(layerData[2][a.eyes]),
-      drawLayer(layerData[3][a.teeth]),
-      drawLayer(layerData[4][a.garment]),
-      drawLayer(layerData[5][a.chain]),
-      drawLayer(layerData[6][a.face]),
-      drawLayer(layerData[7][a.ear]),
-      drawLayer(layerData[8][a.head])
-    ));
+  function drawSVG(uint tokenId) internal view returns (string memory svgString) {
+    uint[] memory a = nftContract.getTokenData(tokenId);
+    for (uint layer = 0; layer < a.length; layer++) {
+      svgString = concat(svgString, drawLayer(layerData[layer]));
+    }
 
     return string(abi.encodePacked(
       '<svg id="artist" width="100%" height="100%" version="1.1" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">',
@@ -88,18 +78,10 @@ contract Layers is AccessControl {
     ));
   }
 
-  function drawSVGTest(INft.Person calldata person) external view returns (string memory) {
-    string memory svgString = string(abi.encodePacked(
-      drawLayer(layerData[0][person.background]),
-      drawLayer(layerData[1][person.body]),
-      drawLayer(layerData[2][person.eyes]),
-      drawLayer(layerData[3][person.teeth]),
-      drawLayer(layerData[4][person.garment]),
-      drawLayer(layerData[5][person.chain]),
-      drawLayer(layerData[6][person.face]),
-      drawLayer(layerData[7][person.ear]),
-      drawLayer(layerData[8][person.head])
-    ));
+  function drawSVGTest(uint[] calldata person) external view returns (string memory svgString) {
+    for (uint layer = 0; layer < person.length; layer++) {
+      svgString = concat(svgString, drawLayer(layerData[layer]));
+    }
 
     return string(abi.encodePacked(
       '<svg id="artist" width="100%" height="100%" version="1.1" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">',
@@ -130,11 +112,12 @@ contract Layers is AccessControl {
     nftContract = INft(_nftContract);
   }
 
-  function uploadLayers(uint8 layer, Layer[] calldata _layers) external onlyRole(UPLOADER_ROLE) {
+  function uploadLayers(Layer[] calldata _layers) external onlyRole(UPLOADER_ROLE) {
     for (uint8 x = 0; x < _layers.length; x++) {
-      layerData[layer][x] = Layer(
+      layerData[x] = Layer(
         _layers[x].name,
-        _layers[x].cid
+        _layers[x].cid,
+        _layers[x].trait
       );
     }
   }

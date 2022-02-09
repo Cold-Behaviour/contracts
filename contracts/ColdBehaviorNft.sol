@@ -12,9 +12,7 @@ contract ColdBehaviorNft is INft, ERC721, AccessControl {
   bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
   bytes32 public constant WHITELIST_ROLE = keccak256("WHITELIST_ROLE");
 
-  //State Variables
-  uint8[][][] public allowedCombinations;  //uint8[layer][option][path_to_item_indexes_in_next_level]
-  
+  uint public combinationCount;
   ILayers public layersContract;
   uint8 public maxMintPerAddress;
   uint public minted = 0;
@@ -23,8 +21,10 @@ contract ColdBehaviorNft is INft, ERC721, AccessControl {
   address public teamAddress;
 
   //State Mappings
-  mapping (uint256 => INft.Person) public tokenData; // token Id => Person
-  
+  mapping (uint => uint[]) public combinations; // combo Id => layer[]
+  mapping (uint => uint) public comboToToken; //combo Id => (token Id + 1) - to overcome initial state of 0 
+  mapping (uint => uint) public tokenToCombo; // token => combo Id
+
   //Events
 
   //Constructor
@@ -48,26 +48,24 @@ contract ColdBehaviorNft is INft, ERC721, AccessControl {
     }
   }
 
-  function generate(uint256 tokenId, uint256 rand) internal returns (Person memory t) {
-    t = selectOptions(rand);
-    bool exists = false;
-    for (uint x = 0; x < tokenId; x++) {
-      if (structToHash(tokenData[x]) == structToHash(t)) {
-        exists = true;
+  function generate(uint tokenId, uint rand) internal returns (uint[] memory t) {
+    rand = rand % MAX_TOKENS;
+    while (1 < 2) {
+      if (comboToToken[rand] == 0) {
         break;
       }
+      rand++;
     }
 
-    if (!exists) {
-      tokenData[tokenId] = t;
-      return t;
-    }
+    comboToToken[rand] = tokenId + 1;
+    tokenToCombo[tokenId + 1] = rand;
 
-    return generate(tokenId, random(rand));
+    return combinations[rand];
   }
 
-  function getTokenData(uint256 tokenId) external override view returns (Person memory) {
-    return tokenData[tokenId];
+  function getTokenData(uint256 tokenId) external override view returns (uint[] memory) {
+    uint comboId = tokenToCombo[tokenId + 1];
+    return combinations[comboId];
   }
 
   function mint(uint8 amount) external payable onlyRole(MINTER_ROLE) {
@@ -91,8 +89,8 @@ contract ColdBehaviorNft is INft, ERC721, AccessControl {
     mintingStarted = !mintingStarted;
   }
 
-  function random(uint256 seed) internal view returns (uint256) {
-    return uint256(keccak256(abi.encodePacked(
+  function random(uint seed) internal view returns (uint) {
+    return uint(keccak256(abi.encodePacked(
     tx.origin,
     blockhash(block.number - 1),
     block.timestamp,
@@ -100,63 +98,16 @@ contract ColdBehaviorNft is INft, ERC721, AccessControl {
     )));
   }
 
-  function selectOption(uint8 rand, uint8 layer, uint8 previousLevelIndex) internal view returns (uint8 option) {
-    if (layer == 0) {
-      option = uint8(rand) % uint8(allowedCombinations[layer].length);
-    } else {
-      option = uint8(rand) % uint8(allowedCombinations[layer - 1][previousLevelIndex].length);
-    }
-    
-    return option;
-  }
-
-  function selectOptions(uint256 rand) internal view returns (Person memory t) {
-    rand >>= 16;
-    t.background = selectOption(uint8(rand & 0xFFFF), 0, 0);  
-    rand >>= 16;
-    t.body = selectOption(uint8(rand & 0xFFFF), 1, t.background);
-    rand >>= 16;
-    t.eyes = selectOption(uint8(rand & 0xFFFF), 2, t.body);
-    rand >>= 16;
-    t.teeth = selectOption(uint8(rand & 0xFFFF), 3, t.eyes);
-    rand >>= 16;
-    t.garment = selectOption(uint8(rand & 0xFFFF), 4, t.teeth);
-    rand >>= 16;
-    t.chain = selectOption(uint8(rand & 0xFFFF), 5, t.garment);
-    rand >>= 16;
-    t.face = selectOption(uint8(rand & 0xFFFF), 6, t.chain);
-    rand >>= 16;
-    t.ear = selectOption(uint8(rand & 0xFFFF), 7, t.face);
-    rand >>= 16;
-    t.head = selectOption(uint8(rand & 0xFFFF), 8, t.ear);
-  }
-
-  function structToHash(Person memory s) internal pure returns (uint256) {
-    return uint256(bytes32(
-    abi.encodePacked(
-        s.background,
-        s.body,
-        s.eyes,
-        s.teeth,
-        s.garment,
-        s.chain,
-        s.face,
-        s.ear,
-        s.head
-    )));
-  }
-
   function tokenURI(uint256 tokenId) public override view returns (string memory) {
     return layersContract.getTokenUri(tokenId);
   }
 
-  function uploadAllowedPaths(uint8 layer, uint8 option, uint8[] calldata allowedPathsToNextLevel) external onlyRole(DEFAULT_ADMIN_ROLE) {
-    for (uint8 x = 0; x < allowedPathsToNextLevel.length; x++) {
-      allowedCombinations[layer][option].push(allowedPathsToNextLevel[x]);
+  function uploadCombinations(uint[][] calldata _combinations) external onlyRole(DEFAULT_ADMIN_ROLE) {
+    for (uint combo = 0; combo < _combinations.length; combo++) {
+      combinations[combinationCount] = _combinations[combo];
+      combinationCount++;
     }
   }
-
-  
 
   //overrides
   function supportsInterface(bytes4 interfaceId)
