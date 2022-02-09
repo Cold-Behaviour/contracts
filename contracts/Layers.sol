@@ -21,12 +21,14 @@ contract Layers is AccessControl {
   }
 
   //State Variables
-  INft nftContract;
+  INft public nftContract;
+  uint public layerCount;
 
   //State Mappings
   mapping (uint => Layer) public layerData;  // layer => Name/CID/Trait
 
   constructor() {
+    _grantRole(DEFAULT_ADMIN_ROLE, msg.sender);
     _grantRole(UPLOADER_ROLE, msg.sender);
   }
 
@@ -59,7 +61,7 @@ contract Layers is AccessControl {
 
   function drawLayer(Layer memory layer) internal pure returns (string memory) {
     return string(abi.encodePacked(
-      '<image x="0" y="0" width="1024" height="1024" image-rendering="pixelated" xlink:href="https://ipfs.io/ipfs/', 
+      '<image x="0" y="0" width="1024" height="1024" image-rendering="pixelated" xlink:href="https://ipfs.coldbehavior.com/ipfs/', 
       layer.cid,
       '" />'  
     ));
@@ -114,11 +116,12 @@ contract Layers is AccessControl {
 
   function uploadLayers(Layer[] calldata _layers) external onlyRole(UPLOADER_ROLE) {
     for (uint8 x = 0; x < _layers.length; x++) {
-      layerData[x] = Layer(
+      layerData[layerCount] = Layer(
         _layers[x].name,
         _layers[x].cid,
         _layers[x].trait
       );
+      layerCount++;
     }
   }
 }
