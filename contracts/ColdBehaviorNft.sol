@@ -24,6 +24,10 @@ contract ColdBehaviorNFT is ERC721, AccessControl {
         return baseUri;
     }
 
+    function nextTokenId() external view returns (uint) {
+        return _tokenIdCounter.current();
+    }
+
     function safeMint(address to) public onlyRole(MINTER_ROLE) {
         uint256 tokenId = _tokenIdCounter.current();
         require(tokenId < MAX_TOKENS, "No more tokens are available to mint");
