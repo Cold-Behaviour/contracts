@@ -12,7 +12,7 @@ contract ColdBehaviorNFT is ERC721, ERC721Enumerable, AccessControl, Pausable {
 
     uint256 public constant MAX_MINT_PER_ADDRESS = 2;
     uint256 public constant MAX_TOKENS = 8888;
-    uint256 public constant MINT_COST = 0.01 ether; //this is just for test purposes - needs to be increased when deployed to mainnet
+    uint256 public mintCost;
     bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
     bytes32 public constant PAUSER_ROLE = keccak256("PAUSER_ROLE");
     bytes32 public constant WITHDRAWAL_ROLE = keccak256("WITHDRAWAL_ROLE");
@@ -29,6 +29,8 @@ contract ColdBehaviorNFT is ERC721, ERC721Enumerable, AccessControl, Pausable {
         baseUri = "https://ipfs.coldbehavior.com/";
         teamAddress = _teamAddress;
 
+        mintCost = block.chainId == 1 ? 0.3 ether : 0.0001 ether;
+        
         _grantRole(WITHDRAWAL_ROLE, teamAddress);
     }
 
@@ -47,7 +49,7 @@ contract ColdBehaviorNFT is ERC721, ERC721Enumerable, AccessControl, Pausable {
         onlyRole(MINTER_ROLE)
     {
         require(
-            msg.value == amount * MINT_COST,
+            msg.value == amount * mintCost,
             "Transaction value does not match the mint cost"
         );
         uint256 ownedTokens = balanceOf(msg.sender);
