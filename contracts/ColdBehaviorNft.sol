@@ -29,7 +29,7 @@ contract ColdBehaviorNFT is ERC721, ERC721Enumerable, AccessControl, Pausable {
         baseUri = "https://ipfs.coldbehavior.com/";
         teamAddress = _teamAddress;
 
-        mintCost = block.chainId == 1 ? 0.3 ether : 0.0001 ether;
+        mintCost = block.chainid == 1 ? 0.3 ether : 0.0001 ether;
         
         _grantRole(WITHDRAWAL_ROLE, teamAddress);
     }
