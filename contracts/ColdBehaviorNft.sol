@@ -4,38 +4,38 @@ pragma solidity ^0.8.4;
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/access/AccessControl.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
-import "@openzeppelin/contracts/security/Pausable.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/IERC721Metadata.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
 
-contract ColdBehaviorNFT is ERC721, ERC721Enumerable, AccessControl, Pausable {
+contract ColdBehaviorNFT is ERC721, ERC721Enumerable, AccessControl {
     using Counters for Counters.Counter;
     using Strings for uint256;
 
-    uint256 public constant MAX_MINT_PER_ADDRESS = 2;
+    bool public activeMint = false;
+    bool public activePresale = false;
+    uint256 public mintPerAddress = 3;
     uint256 public mintCost;
-    bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
-    bytes32 public constant PAUSER_ROLE = keccak256("PAUSER_ROLE");
+    uint256 public presaleCost;
+    bytes32 public constant WHITELIST_ROLE = keccak256("WHITELIST_ROLE");
     bytes32 public constant WITHDRAWAL_ROLE = keccak256("WITHDRAWAL_ROLE");
     address public teamAddress;
 
     Counters.Counter private _tokenIdCounter;
     string public baseUri;
-    uint256 public maxTokens = 8888;
-    
+    uint256 public maxTokens = 5555;
+
     // Optional mapping for token URIs
     mapping(uint256 => string) private _tokenURIs;
 
     constructor(address _teamAddress) ERC721("Cold Behavior NFT", "CBN") {
         _grantRole(DEFAULT_ADMIN_ROLE, msg.sender);
-        _grantRole(MINTER_ROLE, msg.sender);
-        _grantRole(PAUSER_ROLE, msg.sender);
 
         baseUri = "https://ipfs.coldbehavior.com/";
         teamAddress = _teamAddress;
 
-        mintCost = block.chainid == 1 ? 0.3 ether : 0.0001 ether;
+        mintCost = block.chainid == 1 ? 0.17 ether : 0.0001 ether;
+        presaleCost = block.chainid == 1 ? 0.15 ether : 0.0001 ether;
 
         _grantRole(WITHDRAWAL_ROLE, teamAddress);
     }
@@ -44,27 +44,71 @@ contract ColdBehaviorNFT is ERC721, ERC721Enumerable, AccessControl, Pausable {
         return baseUri;
     }
 
-    function devClaim() external onlyRole(DEFAULT_ADMIN_ROLE) {
-        uint256 tokenId = _tokenIdCounter.current();
-        require(tokenId < maxTokens, "No more tokens are available to mint");
-
-        _tokenIdCounter.increment();
-        _safeMint(msg.sender, tokenId);
+    function addWhitelist(address[] calldata members)
+        external
+        onlyRole(DEFAULT_ADMIN_ROLE)
+    {
+        for (uint256 x = 0; x < members.length; x++) {
+            if (!hasRole(WHITELIST_ROLE, members[x])) {
+                _grantRole(WHITELIST_ROLE, members[x]);
+            }
+        }
     }
 
-    function mint(uint256 amount)
-        public
-        payable
-        whenNotPaused
-        onlyRole(MINTER_ROLE)
+    function devClaim(address recipient, uint256 quantity)
+        external
+        onlyRole(DEFAULT_ADMIN_ROLE)
     {
+        for (uint256 i = 0; i < quantity; i++) {
+            uint256 tokenId = _tokenIdCounter.current();
+            require(
+                tokenId < maxTokens,
+                "No more tokens are available to mint"
+            );
+
+            _tokenIdCounter.increment();
+            _safeMint(recipient, tokenId);
+        }
+
+    }
+
+    function mint(uint256 amount) public payable {
+        require(activeMint, "Public mint has not started");
         require(
             msg.value == amount * mintCost,
             "Transaction value does not match the mint cost"
         );
         uint256 ownedTokens = balanceOf(msg.sender);
         require(
-            amount + ownedTokens <= MAX_MINT_PER_ADDRESS,
+            amount + ownedTokens <= mintPerAddress,
+            "Exceeded minting limit"
+        );
+
+        for (uint256 i = 0; i < amount; i++) {
+            uint256 tokenId = _tokenIdCounter.current();
+            require(
+                tokenId < maxTokens,
+                "No more tokens are available to mint"
+            );
+
+            _tokenIdCounter.increment();
+            _safeMint(msg.sender, tokenId);
+        }
+    }
+
+    function presaleMint(uint256 amount)
+        public
+        payable
+        onlyRole(WHITELIST_ROLE)
+    {
+        require(activePresale, "Presale mint has not started");
+        require(
+            msg.value == amount * presaleCost,
+            "Transaction value does not match the mint cost"
+        );
+        uint256 ownedTokens = balanceOf(msg.sender);
+        require(
+            amount + ownedTokens <= mintPerAddress,
             "Exceeded minting limit"
         );
 
@@ -84,10 +128,6 @@ contract ColdBehaviorNFT is ERC721, ERC721Enumerable, AccessControl, Pausable {
         return _tokenIdCounter.current();
     }
 
-    function pause() public onlyRole(PAUSER_ROLE) {
-        _pause();
-    }
-
     function setBaseUri(string memory _baseUri)
         external
         onlyRole(DEFAULT_ADMIN_ROLE)
@@ -95,7 +135,7 @@ contract ColdBehaviorNFT is ERC721, ERC721Enumerable, AccessControl, Pausable {
         baseUri = _baseUri;
     }
 
-    function setMaxTokens(uint max) external onlyRole(DEFAULT_ADMIN_ROLE) {
+    function setMaxTokens(uint256 max) external onlyRole(DEFAULT_ADMIN_ROLE) {
         require(max > totalSupply(), "New max cannot exceed existing supply");
         maxTokens = max;
     }
@@ -146,8 +186,14 @@ contract ColdBehaviorNFT is ERC721, ERC721Enumerable, AccessControl, Pausable {
         return string(abi.encodePacked(base, tokenId.toString(), ".json"));
     }
 
-    function unpause() public onlyRole(PAUSER_ROLE) {
-        _unpause();
+    function toggleMint() external onlyRole(DEFAULT_ADMIN_ROLE) {
+        activeMint = !activeMint;
+        mintPerAddress = 5;
+    }
+
+    function togglePresale() external onlyRole(DEFAULT_ADMIN_ROLE) {
+        activePresale = !activePresale;
+        mintPerAddress = 3;
     }
 
     function withdraw() external payable onlyRole(WITHDRAWAL_ROLE) {
