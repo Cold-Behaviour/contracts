@@ -17,7 +17,8 @@
   },
   "homepage": "https://github.com/Cold-Behaviour/contracts#readme",
   "devDependencies": {
-    "@openzeppelin/truffle-upgrades": "^1.12.0"
+    "@openzeppelin/truffle-upgrades": "^1.12.0",
+    "erc721a": "^3.1.0"
   },
   "dependencies": {
     "@chainlink/contracts": "^0.3.1",

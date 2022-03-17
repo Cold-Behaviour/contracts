@@ -1,15 +1,10 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.4;
 
-import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+import "erc721a/contracts/erc721a.sol";
 import "@openzeppelin/contracts/access/AccessControl.sol";
-import "@openzeppelin/contracts/utils/Counters.sol";
-import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
-import "@openzeppelin/contracts/token/ERC721/extensions/IERC721Metadata.sol";
-import "@openzeppelin/contracts/utils/Strings.sol";
 
-contract ColdBehaviorNFT is ERC721, ERC721Enumerable, AccessControl {
-    using Counters for Counters.Counter;
+contract ColdBehaviorNFT is ERC721A, AccessControl {
     using Strings for uint256;
 
     bool public activeMint = false;
@@ -21,14 +16,13 @@ contract ColdBehaviorNFT is ERC721, ERC721Enumerable, AccessControl {
     bytes32 public constant WITHDRAWAL_ROLE = keccak256("WITHDRAWAL_ROLE");
     address public teamAddress;
 
-    Counters.Counter private _tokenIdCounter;
     string public baseUri;
     uint256 public maxTokens = 5555;
 
     // Optional mapping for token URIs
     mapping(uint256 => string) private _tokenURIs;
 
-    constructor(address _teamAddress) ERC721("Cold Behavior NFT", "CBN") {
+    constructor(address _teamAddress) ERC721A("Cold Behavior NFT", "CBN") {
         _grantRole(DEFAULT_ADMIN_ROLE, msg.sender);
 
         baseUri = "https://ipfs.coldbehavior.com/";
@@ -55,21 +49,16 @@ contract ColdBehaviorNFT is ERC721, ERC721Enumerable, AccessControl {
         }
     }
 
-    function devClaim(address recipient, uint256 quantity)
+    function devClaim(address recipient, uint256 amount)
         external
         onlyRole(DEFAULT_ADMIN_ROLE)
     {
-        for (uint256 i = 0; i < quantity; i++) {
-            uint256 tokenId = _tokenIdCounter.current();
-            require(
-                tokenId < maxTokens,
-                "No more tokens are available to mint"
-            );
-
-            _tokenIdCounter.increment();
-            _safeMint(recipient, tokenId);
-        }
-
+        uint256 ownedTokens = balanceOf(msg.sender);
+        require(
+            amount + ownedTokens <= mintPerAddress,
+            "Exceeded minting limit"
+        );
+        _safeMint(recipient, amount);
     }
 
     function mint(uint256 amount) public payable {
@@ -84,16 +73,7 @@ contract ColdBehaviorNFT is ERC721, ERC721Enumerable, AccessControl {
             "Exceeded minting limit"
         );
 
-        for (uint256 i = 0; i < amount; i++) {
-            uint256 tokenId = _tokenIdCounter.current();
-            require(
-                tokenId < maxTokens,
-                "No more tokens are available to mint"
-            );
-
-            _tokenIdCounter.increment();
-            _safeMint(msg.sender, tokenId);
-        }
+        _safeMint(msg.sender, amount);
     }
 
     function presaleMint(uint256 amount)
@@ -112,20 +92,7 @@ contract ColdBehaviorNFT is ERC721, ERC721Enumerable, AccessControl {
             "Exceeded minting limit"
         );
 
-        for (uint256 i = 0; i < amount; i++) {
-            uint256 tokenId = _tokenIdCounter.current();
-            require(
-                tokenId < maxTokens,
-                "No more tokens are available to mint"
-            );
-
-            _tokenIdCounter.increment();
-            _safeMint(msg.sender, tokenId);
-        }
-    }
-
-    function nextTokenId() external view returns (uint256) {
-        return _tokenIdCounter.current();
+        _safeMint(msg.sender, amount);
     }
 
     function setBaseUri(string memory _baseUri)
@@ -145,15 +112,19 @@ contract ColdBehaviorNFT is ERC721, ERC721Enumerable, AccessControl {
         view
         returns (uint256[] memory)
     {
-        uint256 tokenCount = balanceOf(_owner);
+        uint256 tokenCount = totalSupply();
         if (tokenCount == 0) {
             // Return an empty array
             return new uint256[](0);
         } else {
             uint256[] memory result = new uint256[](tokenCount);
             uint256 index;
+            uint i = 0;
             for (index = 0; index < tokenCount; index++) {
-                result[index] = tokenOfOwnerByIndex(_owner, index);
+                if (ownerOf(index) == _owner) {
+                    result[i] = index;
+                    i++;
+                }
             }
             return result;
         }
@@ -201,18 +172,10 @@ contract ColdBehaviorNFT is ERC721, ERC721Enumerable, AccessControl {
     }
 
     // The following functions are overrides required by Solidity.
-    function _beforeTokenTransfer(
-        address from,
-        address to,
-        uint256 tokenId
-    ) internal override(ERC721, ERC721Enumerable) {
-        super._beforeTokenTransfer(from, to, tokenId);
-    }
-
     function supportsInterface(bytes4 interfaceId)
         public
         view
-        override(ERC721, ERC721Enumerable, AccessControl)
+        override(ERC721A, AccessControl)
         returns (bool)
     {
         return super.supportsInterface(interfaceId);
