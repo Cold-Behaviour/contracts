@@ -164,7 +164,7 @@ contract ColdBehaviorNFT is ERC721A, AccessControl {
         mintPerAddress = 3;
     }
 
-    function withdraw() external payable {
+    function withdraw() external payable onlyRole(DEFAULT_ADMIN_ROLE) {
         payable(teamAddress).transfer(address(this).balance);
     }
 
