@@ -13,7 +13,6 @@ contract ColdBehaviorNFT is ERC721A, AccessControl {
     uint256 public mintCost;
     uint256 public presaleCost;
     bytes32 public constant WHITELIST_ROLE = keccak256("WHITELIST_ROLE");
-    bytes32 public constant WITHDRAWAL_ROLE = keccak256("WITHDRAWAL_ROLE");
     address public teamAddress;
 
     string public baseUri;
@@ -30,8 +29,6 @@ contract ColdBehaviorNFT is ERC721A, AccessControl {
 
         mintCost = block.chainid == 1 ? 0.17 ether : 0.0001 ether;
         presaleCost = block.chainid == 1 ? 0.15 ether : 0.0001 ether;
-
-        _grantRole(WITHDRAWAL_ROLE, teamAddress);
     }
 
     function _baseURI() internal view override returns (string memory) {
@@ -167,8 +164,8 @@ contract ColdBehaviorNFT is ERC721A, AccessControl {
         mintPerAddress = 3;
     }
 
-    function withdraw() external payable onlyRole(WITHDRAWAL_ROLE) {
-        payable(msg.sender).transfer(address(this).balance);
+    function withdraw() external payable {
+        payable(teamAddress).transfer(address(this).balance);
     }
 
     // The following functions are overrides required by Solidity.
